@@ -26,11 +26,11 @@ export default class EditExercise extends Component {
 					username: response.data.username,
 					description: response.data.description,
 					duration: response.data.duration,
-					date: response.data.date
+					date: new Date(response.data.date)
 				});
 			})
 			.catch(function(error) {
-				console.log(error);
+				console.log(error + "this is me");
 			});
 		axios.get("http://localhost:5000/user/").then((response) => {
 			if (response.data.length > 0) {
@@ -126,6 +126,7 @@ export default class EditExercise extends Component {
 						<label>Date:</label>
 						<div>
 							<DatePicker
+								dateFormat="mm-dd-yyyy"
 								selected={this.state.date}
 								onChange={this.onChangeDate}
 							/>

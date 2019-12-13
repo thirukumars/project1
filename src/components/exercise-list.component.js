@@ -10,7 +10,9 @@ const Exercise = (props) => (
 		<td>{props.exercise.date.substring(0, 10)}</td>
 		<td>
 			<Link to={"/edit/" + props.exercise._id}>edit</Link> |
-			{/* <button onClick={props.deleteExercise(props.exercise._id)}>delete</button> */}
+			<button onClick={() => props.deleteExercise(props.exercise._id)}>
+				delete
+			</button>
 		</td>
 	</tr>
 );
@@ -21,7 +23,7 @@ export default class ExerciseList extends Component {
 		this.state = {
 			exercise: []
 		};
-		// this.deleteExercise = this.deleteExercise.bind(this);
+		this.deleteExercise = this.deleteExercise.bind(this);
 		this.exerciseList = this.exerciseList.bind(this);
 	}
 	componentDidMount() {
@@ -36,14 +38,14 @@ export default class ExerciseList extends Component {
 				console.log(error);
 			});
 	}
-	// deleteExercise(id) {
-	// 	axios
-	// 		.delete("http://localhost:5000/exercise/" + id)
-	// 		.then((res) => console.log(res.data));
-	// 	this.setState({
-	// 		exercise: this.state.exercise.filter((el) => el._id !== id)
-	// 	});
-	// }
+	deleteExercise(id) {
+		axios
+			.delete("http://localhost:5000/exercise/" + id)
+			.then((res) => console.log(res.data));
+		this.setState({
+			exercise: this.state.exercise.filter((el) => el._id !== id)
+		});
+	}
 	exerciseList() {
 		return this.state.exercise.map((currentExercise) => {
 			return (
